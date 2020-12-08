@@ -1,27 +1,5 @@
-class Cliente{
-    nome;
-    cpf;
-}
-
-class ContaCorrenta{
-    agencia;
-    _saldo = 0;
-    
-    sacar(valor){
-        if(this._saldo >= valor){
-            this._saldo -= valor;
-            return valor;
-        }
-           
-    }
-    
-    depositar(valor){
-        if(valor <= 0){
-            return; //early return caso a condição for verdadeira ele já sai da execulção da função por ter o return
-        }  
-        this._saldo += valor;  
-    }
-}
+import {Cliente} from "./Cliente.js"
+import {ContaCorrenta} from "./ContaCorrente.js" 
 
 const cliente1 = new Cliente();
 cliente1.nome = "Ricardo";
@@ -33,13 +11,20 @@ cliente2.cpf = 88822233309;
 
 const contaCorrenteRicardo = new ContaCorrenta();
 contaCorrenteRicardo.agencia = 1001;
-const contaCorrenteAlice = new ContaCorrenta();
-
-contaCorrenteRicardo.depositar(100);
-
-const valorSacado = contaCorrenteRicardo.sacar(50);
+contaCorrenteRicardo.cliente = cliente1;
 
 
-console.log(valorSacado);
+const conta2 = new ContaCorrenta();
+conta2.cliente = cliente2;
+conta2.agencia = 102;
 
-console.log(contaCorrenteRicardo);
+contaCorrenteRicardo.depositar(500);
+
+let valor = 200;
+contaCorrenteRicardo.tranferir(valor, conta2);
+
+console.log("valor: ", valor);
+
+console.log(conta2);
+
+
