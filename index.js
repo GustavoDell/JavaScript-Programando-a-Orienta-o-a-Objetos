@@ -1,24 +1,21 @@
-import {Cliente} from "./Cliente.js"
-import { Conta } from "./Conta.js";
-import { ContaCorrente } from "./ContaCorrente.js";
-import { ContaPoupanca } from "./ContaPoupanca.js";
-import { ContaSalario } from "./ContaSalario.js";
+import {Cliente} from "./Cliente.js";
+import {Gerente} from "./Funcionarios/Gerente.js";
+import {Diretor} from "./Funcionarios/Diretor.js";
+import {SistemaAutenticacao} from "./SistemaAutenticacao.js";
 
-const cliente1 = new Cliente("Ricardo", 11122233309);
+const diretor = new Diretor("Rodrigo", 10000, 12345678900);
+diretor.cadastrarSenha("123456")
+const gerente = new Gerente("Rodrigo", 5000, 12345678901);
+gerente.cadastrarSenha("123")
 
-const contaCorrente1 = new ContaCorrente(0, cliente1, 1001);
+//polimorfismo, fazer com classes abstratas represente o comportamento de classes concretas
 
-const contaPoupanca1 = new ContaPoupanca(50, cliente1, 1001);
+const cliente = new Cliente("Lais", 7894512379, "456");
+const clienteEstaLogado = SistemaAutenticacao.login(cliente, "456");
 
-const contaSalario = new ContaSalario(cliente1);
+const gerenteEstaLogado = SistemaAutenticacao.login(gerente, "123");
+const diretorEstaLogado = SistemaAutenticacao.login(diretor, "123456");
 
-contaSalario.depositar(100);
-contaSalario.sacar(10);
-
-// console.log(contaPoupanca1);
-// console.log(contaCorrente1);
-// console.log(conta);
-
-console.log(contaSalario);
-
-
+console.log(gerenteEstaLogado);
+console.log(diretorEstaLogado);
+console.log(clienteEstaLogado);
